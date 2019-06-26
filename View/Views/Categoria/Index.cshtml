@@ -21,14 +21,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>1</th>
-                    <th>Terra</th>
-                    <td>
-                        <a href="" class="btn btn-primary"><i class="fas fa-pen"></i> Editar</>
-                        <a href="" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</a>
-                    </td>
-                </tr>
+                @foreach (Model.Categoria categoria in ViewBag.Categorias)
+                {
+                    <tr>
+                        <td>@categoria.Id</td>
+                        <td>@categoria.Nome</td>
+                        <td>
+                            <a href="" class="btn btn-primary">
+                                <i class="fas fa-pen"></i> Editar</a>
+                            <a href="" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Apagar
+                            </a>
+                        </td>
+                    </tr>
+                }
             </tbody>
             <tfoot>
                 <tr>
