@@ -16,7 +16,7 @@ namespace Repository.Repositories
         public bool Alterar(Categoria categoria)
         {
             SqlCommand comando = Conexao.AbrirConexao();
-            comando.CommandText = "@UPDATE categorias SET nome = @NOME WHERE id = @ID";
+            comando.CommandText = "UPDATE categorias SET nome = @NOME WHERE id = @ID";
             comando.Parameters.AddWithValue("@NOME", categoria.Nome);
             comando.Parameters.AddWithValue("@ID", categoria.Id);
             int quantidade = comando.ExecuteNonQuery();
