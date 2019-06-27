@@ -40,5 +40,6 @@ namespace View.Controllers
             repositorio.Inserir(pokemon);
             return RedirectToAction("Index");
         }
+
     }
 }

@@ -3,6 +3,7 @@ using Repository.DataBase;
 using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,25 @@ namespace Repository.Repositories
 
         public List<Pokemon> ObterTodos(int id)
         {
-            throw new NotImplementedException();
+            SqlCommand comando = Conexao.AbrirConexao();
+            comando.CommandText = "SELECT categorias.id AS 'CategoriaId', categorias.nome AS 'CategoriaNome', pokemons.id AS 'Id', pokemons.nome AS 'Nome' FROM pokemons INNER JOIN categorias ON (pokemons.id_categoria = categorias.id)";
+
+            DataTable tabela = new DataTable();
+            tabela.Load(comando.ExecuteReader());
+            comando.Connection.Close();
+            List<Pokemon> pokemons = new List<Pokemon>();
+            foreach(DataRow linha in tabela.Rows)
+            {
+                Pokemon pokemon = new Pokemon();
+                pokemon.Id = Convert.ToInt32(linha["Id"]);
+                pokemon.Nome = linha["Nome"].ToString();
+                pokemon.IdCategoria = Convert.ToInt32(linha["CategoriaId"]);
+                pokemon.Categoria = new Categoria();
+                pokemon.Categoria.Id = Convert.ToInt32(linha["CategoriaId"]);
+                pokemon.Categoria.Nome = linha["CategoriaNome"].ToString();
+                pokemons.Add(pokemon);
+            }
+            return pokemons;
         }
     }
 }
