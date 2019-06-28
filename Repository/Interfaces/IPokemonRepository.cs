@@ -15,7 +15,7 @@ namespace Repository.Interfaces
 
         bool Apagar(int id);
 
-        List<Pokemon> ObterTodos(int id);
+        List<Pokemon> ObterTodos();
 
         Pokemon ObterPeloId(int id);
     }
